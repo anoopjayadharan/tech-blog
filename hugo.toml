@@ -3,7 +3,7 @@ baseURL = "https://yourdomain.com"
 defaultContentLanguage = "en"
 # language code
 languageCode = "en"
-title = "NAME_OF_YOUR_BLOG"
+title = "AJ-TECH-BLOG"
 
 # Change the default theme to be use when building the site with Hugo
 theme = "LoveIt"
@@ -91,7 +91,7 @@ theme = "LoveIt"
   #  App icon config
   [params.app]
     # optional site title override for the app when added to an iOS home screen or Android launcher
-    title = "NAME_OF_YOUR_BLOG"
+    title = "AJ-TECH-BLOG"
     # whether to omit favicon resource links
     noFavicon = false
     # modern SVG favicon to use in place of older style .png and .ico files
@@ -136,7 +136,7 @@ theme = "LoveIt"
       # URL of the LOGO
       logo = ""
       # title name
-      name = "NAME_OF_YOUR_BLOG"
+      name = "AJ-TECH-BLOG"
       # you can add extra information before the name (HTML format is supported), such as icons
       pre = ""
       # you can add extra information after the name (HTML format is supported), such as icons
@@ -190,9 +190,9 @@ theme = "LoveIt"
       # Gravatar Email for preferred avatar in home page
       gravatarEmail = ""
       # URL of avatar shown in home page (LINK_TO_YOUR_PHOTO_BELOW)
-      avatarURL = "https://avatars.githubusercontent.com/u/7815661?v=4"
+      avatarURL = "https://avatars.githubusercontent.com/u/37132992?s…00&u=77ad586cdfcea33b350fae31f59a269f468335fc&v=4"
       #  title shown in home page (HTML format is supported)
-      title = "NAME_OF_YOUR_BLOG"
+      title = "AJ-TECH-BLOG"
       # subtitle shown in home page
       subtitle = "My AWS DevOps Engineering Journey"
       # whether to use typeit animation for subtitle
@@ -214,7 +214,7 @@ theme = "LoveIt"
   [params.social]
     Bitbucket = ""
     GitHub = ""
-    Linkedin = "YOUR_LINKEDIN_LINK"
+    Linkedin = "https://www.linkedin.com/in/anoop-jayadharan-ba677998/"
     Twitter = ""
     Gitlab = ""
     Email = ""
@@ -505,7 +505,7 @@ theme = "LoveIt"
 
 # Author config
 [author]
-  name = "YOUR_NAME"
+  name = "Anoop Jayadharan"
   email = ""
   link = ""
 
