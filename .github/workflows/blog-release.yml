@@ -1,0 +1,51 @@
+name: Release
+
+on:
+    push:
+        branches: 
+            - main
+            - 'feature/development'
+
+env:
+  BUCKET_NAME : "tech-blog-data"
+  AWS_REGION : "eu-west-1"
+  
+jobs:
+    build:
+        name: Tech Blog
+        runs-on: ubuntu-latest
+        permissions:
+          id-token: write
+          contents: read
+        steps:
+            - name: Checkout Repository
+              uses: actions/checkout@v4
+
+            - name: Setup Hugo
+              uses: peaceiris/actions-hugo@v3
+              with:
+                hugo-version: 'latest'
+                extended: true
+
+            - name: Build
+              run: hugo
+
+            - name: Configure AWS credentials
+              uses: aws-actions/configure-aws-credentials@v4
+              with:
+                role-to-assume: ${{secrets.AWS_IAM_ROLE}}
+                aws-region: ${{ env.AWS_REGION }}
+
+            - name: S3 sync
+              run: aws s3 sync public/ s3://${{env.BUCKET_NAME}}
+
+            - name: Create CloudFront Invalidation
+              run: |
+                aws cloudfront create-invalidation \
+                --distribution-id ${{vars.DISTRIBUTION_ID}} \
+                --paths "/*"
+
+
+
+              
+
