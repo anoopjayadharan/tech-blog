@@ -7,16 +7,20 @@ on:
             - 'feature/development'
 
 env:
-  BUCKET_NAME : "tech-blog-data"
-  AWS_REGION : "eu-west-1"
+  AWS_REGION : "eu-west-1"    # AWS region where s3 bucket is deployed
   
 jobs:
-    build:
-        name: Tech Blog
+
+  # This job runs our automated build process including
+  # git clone repository
+  # setting up HUGO development server
+  # build artifact for the website
+  # obtain OIDC token from aws
+  # sync s3 bucket
+  # create cloudfront cache invalidation 
+    build_job:
+        name: Build
         runs-on: ubuntu-latest
-        permissions:
-          id-token: write
-          contents: read
         steps:
             - name: Checkout Repository
               uses: actions/checkout@v4
@@ -30,6 +34,27 @@ jobs:
             - name: Build
               run: hugo
 
+            - name: Upload Build Artifact
+              uses: actions/upload-artifact@v4
+              with:
+                name: tech-blog
+                path: public/*
+
+    deploy_job:
+        name: Publish
+        needs: [build_job]
+        runs-on: ubuntu-latest
+        permissions:
+          id-token: write     # This is required for requesting the JWT
+          contents: read      # This is required for actions/checkout
+
+        steps:
+
+            - name: Download Build Artifacts
+              uses: actions/download-artifact@v4
+              with:
+                name: tech-blog
+
             - name: Configure AWS credentials
               uses: aws-actions/configure-aws-credentials@v4
               with:
@@ -37,13 +62,16 @@ jobs:
                 aws-region: ${{ env.AWS_REGION }}
 
             - name: S3 sync
-              run: aws s3 sync public/ s3://${{env.BUCKET_NAME}}
+              run: | 
+                aws s3 sync . s3://${{secrets.BUCKET_NAME}} \
+                --delete
 
             - name: Create CloudFront Invalidation
               run: |
                 aws cloudfront create-invalidation \
                 --distribution-id ${{vars.DISTRIBUTION_ID}} \
                 --paths "/*"
+
 
 
 
