@@ -14,10 +14,8 @@ jobs:
   # This job runs our automated build process including
   # git clone repository
   # setting up HUGO development server
-  # build artifact for the website
-  # obtain OIDC token from aws
-  # sync s3 bucket
-  # create cloudfront cache invalidation 
+  # build and upload artifact for the website
+
     build_job:
         name: Build
         runs-on: ubuntu-latest
@@ -28,7 +26,7 @@ jobs:
             - name: Setup Hugo
               uses: peaceiris/actions-hugo@v3
               with:
-                hugo-version: 'latest'
+                hugo-version: '0.135.0'
                 extended: true
 
             - name: Build
@@ -40,6 +38,11 @@ jobs:
                 name: tech-blog
                 path: public/*
 
+  # This job runs our deployment pipeline
+  # obtain OIDC token from aws
+  # sync s3 bucket
+  # create cloudfront cache invalidation 
+
     deploy_job:
         name: Publish
         needs: [build_job]
@@ -49,7 +52,6 @@ jobs:
           contents: read      # This is required for actions/checkout
 
         steps:
-
             - name: Download Build Artifacts
               uses: actions/download-artifact@v4
               with:
@@ -71,6 +73,7 @@ jobs:
                 aws cloudfront create-invalidation \
                 --distribution-id ${{vars.DISTRIBUTION_ID}} \
                 --paths "/*"
+                
 
 
 
