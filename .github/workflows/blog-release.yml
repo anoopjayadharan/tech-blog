@@ -1,6 +1,10 @@
 name: Release
 
-on:
+# this workflow gets triggered for push
+# events in feature/development and main branch
+
+on: 
+    workflow_dispatch: 
     push:
         branches: 
             - main
@@ -11,6 +15,60 @@ env:
   
 jobs:
 
+  # This job provisions AWS inrastructure using HCP terraform
+  # git clone repository
+  # Install terraform CLI
+  # execute terraform workflow - init, plan and apply
+  # store and pass output across the jobs
+
+    Infra_job:
+        name: AWS Infrastructure Provisioning with Terraform
+        runs-on: ubuntu-latest
+        defaults:
+          run:
+            working-directory: terraform
+
+        # s3_bucket name and cloudfront distribution ids are stored
+        # as outputs and will be passed to "deploy_job"
+
+        outputs:
+          s3_bucket: ${{ steps.tf_out.outputs.s3 }}
+          cf_id: ${{ steps.tf_out.outputs.cfid }}
+
+        steps:
+            - name: Checkout Repository
+              uses: actions/checkout@v4
+
+            - name: Terraform Workflow
+              uses: hashicorp/setup-terraform@v3
+              with:
+                terraform_version: "1.9.7"
+                cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}     # API_TOKEN for HCP
+
+            - name: Terraform Init
+              id: init
+              run: terraform init
+
+            - name: Terraform Validate
+              id: validate
+              run: terraform validate -no-color
+
+            - name: Terraform Plan
+              id: plan
+              run: terraform plan -no-color
+              continue-on-error: true
+
+            - name: Terraform Apply
+              id: Apply
+              run: terraform apply -auto-approve
+
+            - name: Terraform Output
+              id: tf_out
+              run: |
+                echo "s3=$(terraform output s3_bucket | tr -d '""')" >> "$GITHUB_OUTPUT"
+                echo "cfid=$(terraform output cloudFront_ID | tr -d '""')" >> "$GITHUB_OUTPUT"
+                echo "domain=$(terraform output cloudFront_domain_name | tr -d '""')" >> "$GITHUB_OUTPUT"
+
   # This job runs our automated build process including
   # git clone repository
   # setting up HUGO development server
@@ -18,7 +76,9 @@ jobs:
 
     build_job:
         name: Build
+        needs: [Infra_job]
         runs-on: ubuntu-latest
+
         steps:
             - name: Checkout Repository
               uses: actions/checkout@v4
@@ -45,7 +105,10 @@ jobs:
 
     deploy_job:
         name: Publish
-        needs: [build_job]
+        needs: [build_job, Infra_job]
+        env:
+          S3_BUCKET: ${{needs.Infra_job.outputs.s3_bucket}}
+          DISTRIBUTION_ID: ${{needs.Infra_job.outputs.cf_id}}
         runs-on: ubuntu-latest
         permissions:
           id-token: write     # This is required for requesting the JWT
@@ -65,15 +128,16 @@ jobs:
 
             - name: S3 sync
               run: | 
-                aws s3 sync . s3://${{secrets.BUCKET_NAME}} \
+                aws s3 sync . s3://${{env.S3_BUCKET}} \
                 --delete
 
             - name: Create CloudFront Invalidation
               run: |
                 aws cloudfront create-invalidation \
-                --distribution-id ${{vars.DISTRIBUTION_ID}} \
+                --distribution-id ${{env.DISTRIBUTION_ID}} \
                 --paths "/*"
                 
+
 
 
 
