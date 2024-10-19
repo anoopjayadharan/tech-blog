@@ -1,30 +1,27 @@
-locals {
-  depends_on     = [aws_s3_bucket.my-blog]
-  s3_origin_id   = "${var.s3_name}-origin"
-  s3_domain_name = "${aws_s3_bucket.my-blog.id}.s3-website-${var.region}.amazonaws.com"
-}
 resource "aws_cloudfront_distribution" "s3_distribution" {
-  depends_on       = [aws_s3_bucket_website_configuration.s3_website]
+  depends_on       = [aws_s3_bucket.my-blog]
   retain_on_delete = true
   origin {
-    domain_name = local.s3_domain_name
-    origin_id   = local.s3_origin_id
-    custom_origin_config {
-      http_port              = 80
-      https_port             = 443
-      origin_protocol_policy = "http-only"
-      origin_ssl_protocols   = ["TLSv1"]
-    }
+    domain_name              = local.s3_domain_name
+    origin_id                = local.s3_origin_id
+    origin_access_control_id = aws_cloudfront_origin_access_control.S3_OAC.id
   }
 
   enabled             = true
   is_ipv6_enabled     = true
   default_root_object = "index.html"
 
+  # aliases = ["ajworkspace.cloudtalents.io"]
+
   default_cache_behavior {
     allowed_methods  = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
     cached_methods   = ["GET", "HEAD"]
     target_origin_id = local.s3_origin_id
+
+    function_association {
+      event_type   = "viewer-request"
+      function_arn = aws_cloudfront_function.URI_Add.arn
+    }
 
     forwarded_values {
       query_string = false
@@ -49,4 +46,43 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
   viewer_certificate {
     cloudfront_default_certificate = true
   }
+}
+resource "aws_cloudfront_origin_access_control" "S3_OAC" {
+  name                              = aws_s3_bucket.my-blog.id
+  description                       = "OAC for S3 bucket ${aws_s3_bucket.my-blog.id}"
+  origin_access_control_origin_type = "s3"
+  signing_behavior                  = "always"
+  signing_protocol                  = "sigv4"
+}
+resource "aws_cloudfront_function" "URI_Add" {
+  name    = "custom_function"
+  runtime = "cloudfront-js-2.0"
+  comment = "Add index.html to request URLs without a file name"
+  publish = true
+  code    = file("code/function.js")
+}
+resource "aws_s3_bucket_policy" "CF_S3_Policy" {
+  bucket = aws_s3_bucket.my-blog.id
+  policy = <<EOT
+  {
+        "Version": "2008-10-17",
+        "Id": "PolicyForCloudFrontPrivateContent",
+        "Statement": [
+            {
+                "Sid": "AllowCloudFrontServicePrincipal",
+                "Effect": "Allow",
+                "Principal": {
+                    "Service": "cloudfront.amazonaws.com"
+                },
+                "Action": "s3:GetObject",
+                "Resource": "arn:aws:s3:::${aws_s3_bucket.my-blog.id}/*",
+                "Condition": {
+                    "StringEquals": {
+                      "AWS:SourceArn": "arn:aws:cloudfront::396913712777:distribution/${aws_cloudfront_distribution.s3_distribution.id}"
+                    }
+                }
+            }
+        ]
+      }
+      EOT
 }
