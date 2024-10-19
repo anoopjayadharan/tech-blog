@@ -1,4 +1,4 @@
-name: Infra Clean-Up
+name: Infra Clean-up
 
 on: 
     workflow_dispatch:
