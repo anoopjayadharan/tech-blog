@@ -26,6 +26,15 @@ jobs:
                 terraform_version: "1.9.7"
                 cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}     # API_TOKEN for HCP Terraform
 
+            - name: Terraform Init
+              id: init
+              run: terraform init
+
+            - name: Terraform PLan
+              id: plan
+              run: terraform plan
+              continue-on-error: true
+
             - name: Terraform Destroy
               id: destroy
               run: terraform destroy -auto-approve
