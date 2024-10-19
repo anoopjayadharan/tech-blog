@@ -1,17 +1,15 @@
-name: Infra Clean-up
+name: Terraform Destroy
 
 on: 
     workflow_dispatch:
-    push:
-      branches: 
-          - feature/v1
+
 
 env:
   AWS_REGION : "eu-west-1"    # AWS region where resources are deployed
 
 jobs:
     cleanup_job:
-        name: Clean-UP 
+        name: Clean-Up
         runs-on: ubuntu-latest
         defaults:
           run:
