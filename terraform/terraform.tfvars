@@ -1,1 +1,1 @@
-s3_name = "aj-tech-blog"
+s3_name = "aj-tech-blog-prd"
