@@ -2,6 +2,9 @@ name: Infra Clean-Up
 
 on: 
     workflow_dispatch:
+    push:
+      branches: 
+          - feature/v1
 
 env:
   AWS_REGION : "eu-west-1"    # AWS region where resources are deployed
