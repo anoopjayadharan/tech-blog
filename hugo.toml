@@ -1,9 +1,9 @@
-baseURL = "https://yourdomain.com"
+baseURL = "https://ajworkspace.cloudtalents.io"
 # [en, zh-cn, fr, ...] determines default content language
 defaultContentLanguage = "en"
 # language code
 languageCode = "en"
-title = "AJ-TECH-BLOG"
+title = "DevOpsify Engineering"
 
 # Change the default theme to be use when building the site with Hugo
 theme = "LoveIt"
@@ -91,7 +91,7 @@ theme = "LoveIt"
   #  App icon config
   [params.app]
     # optional site title override for the app when added to an iOS home screen or Android launcher
-    title = "AJ-TECH-BLOG"
+    title = "DevOpsify Engineering"
     # whether to omit favicon resource links
     noFavicon = false
     # modern SVG favicon to use in place of older style .png and .ico files
@@ -136,7 +136,7 @@ theme = "LoveIt"
       # URL of the LOGO
       logo = ""
       # title name
-      name = "AJ-TECH-BLOG"
+      name = "DevOpsify Engineering"
       # you can add extra information before the name (HTML format is supported), such as icons
       pre = ""
       # you can add extra information after the name (HTML format is supported), such as icons
@@ -192,9 +192,9 @@ theme = "LoveIt"
       # URL of avatar shown in home page (LINK_TO_YOUR_PHOTO_BELOW)
       avatarURL = "https://avatars.githubusercontent.com/u/37132992?s…00&u=77ad586cdfcea33b350fae31f59a269f468335fc&v=4"
       #  title shown in home page (HTML format is supported)
-      title = "AJ-TECH-BLOG"
+      title = "DevOpsify Engineering"
       # subtitle shown in home page
-      subtitle = "My AWS DevOps Engineering Journey"
+      subtitle = "My AWS DevOps Quest"
       # whether to use typeit animation for subtitle
       typeit = true
       # whether to show social links
@@ -213,7 +213,7 @@ theme = "LoveIt"
   # Social config about the author
   [params.social]
     Bitbucket = ""
-    GitHub = ""
+    GitHub = "anoopjayadharan-me"
     Linkedin = "anoop-jayadharan-ba677998/"
     Twitter = ""
     Gitlab = ""
