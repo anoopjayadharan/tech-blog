@@ -11,7 +11,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
   is_ipv6_enabled     = true
   default_root_object = "index.html"
 
-  # aliases = ["ajworkspace.cloudtalents.io"]
+  aliases = ["ajworkspace.cloudtalents.io"]
 
   default_cache_behavior {
     allowed_methods  = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
@@ -44,7 +44,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
   }
 
   viewer_certificate {
-    cloudfront_default_certificate = true
+    acm_certificate_arn = aws_acm_certificate.blog_cert.arn
   }
 }
 resource "aws_cloudfront_origin_access_control" "S3_OAC" {
