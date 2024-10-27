@@ -17,7 +17,7 @@ The concepts and tools covered in this blog are,
 - CI/CD            - GitHub Actions
 - Cloud Provider   - AWS
 
-Are you keen to learn the process? Here we go with our [Assignment - Week#02](https://www.skool.com/cloudtalents/demo-week01?p=5da1ea21). Try do it yourself.
+Are you keen to learn the process? Here we go with my [Demo - Week#02](https://www.loom.com/share/fa1bdccfa1004b63afd78b8fcd8845cc?sid=8baee312-c857-476b-bf72-0655de9b7b47). Try do it yourself.
 
 
 <iframe src="https://giphy.com/embed/Y0b2MpUTfnrUa3jIM7" width="324" height="480" style="" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
