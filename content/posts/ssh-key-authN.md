@@ -1,8 +1,12 @@
-+++
-title = 'SSH-key based AuthN'
-date = 2024-10-29T18:07:15+03:00
-draft = false
-+++
+---
+title: 'SSH key based AuthN'
+date: 2024-10-20
+hiddenFromHomePage: true
+tags: ["lab", "Git", "SSH-key", "GitHub"]
+categories: ["Documentation"]
+draft: false
+---
+
 Have you ever wondered how to manage multiple GitHub accounts locally?
 
 What If I told you not to use an *https://* URL to clone the repo and use **SSH** instead?

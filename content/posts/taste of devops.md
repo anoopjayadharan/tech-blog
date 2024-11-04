@@ -1,10 +1,12 @@
-+++
-title = 'A Taste of DevOps'
-date = 2024-10-20T15:06:12+03:00
-draft = false
-+++
+---
+title: 'A Taste of DevOps'
+date: 2024-10-19
+tags: ["AWS", "devOps", "Git", "GitHub Actions", "Terraform"]
+categories: ["Documentation"]
+draft: false
+---
 
-This week, we will discuss automating the deployment of our Tech Blog more.
+This week, we will discuss automating the deployment of our Tech Blog.<!--more-->
 
 Initially, we created the S3 bucket and CloudFront resources manually.
 

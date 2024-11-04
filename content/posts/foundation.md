@@ -1,10 +1,12 @@
-+++
-title = 'The Foundation'
-date = 2024-10-20T18:05:43+03:00
-draft = false
-+++
+---
+title: 'The Foundation'
+date: 2024-10-21
+draft: false
+tags: ["AWS", "devOps", "controltower"]
+categories: ["Documentation"]
+---
 
-In this blog, you will deploy a landing zone using the AWS control tower
+In this blog, you will deploy a landing zone using the AWS control tower <!--more-->
 
 Enable the IAM Identity Center and create a personal IAM user
 
