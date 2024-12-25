@@ -1,4 +1,4 @@
-name: Release
+name: Blog release to AWS
 
 # this workflow gets triggered for push
 # events in feature/development and main branch
