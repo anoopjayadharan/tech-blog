@@ -117,6 +117,8 @@ build_job:
                 name: tech-blog
                 path: public/* 
 ```
+
+### Deploy_job
 The final job is to publish the website by deploying the **Artifacts** generated in the build_job to **Amazon S3**. Here, we use OIDC integration between GitHub and AWS for the GitHub runner to leverage AWS CLI for running s3 sync and cache-invalidation commands. 
 
 ```YAML
