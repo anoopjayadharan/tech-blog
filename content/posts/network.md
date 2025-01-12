@@ -1,17 +1,114 @@
 ---
-title: 'Building the Connectivity'
+title: 'Networking in AWS'
 date: 2024-10-18
 tags: ["AWS", "VPC", "Terraform", "RAM"]
 categories: ["Documentation"]
 draft: false
 ---
 
-Networking is one of the core concepts in cloud computing <!--more-->
+Networking is one of the core pillars of the cloud computing model. Amazon VPC(virtual private cloud) helps you launch a secure, isolated private cloud hosted within a public cloud.
 
-In this demonstration, I discuss setting up networking resources for our accounts using the AWS Security Reference Architecture. 
+In a multi-account environment, you must find a way to create VPCs and associated objects across managed accounts. AWS recommends creating a Network account under the Infrastructure OU.
 
-Watch me on the **[Demo - Week#03](https://www.loom.com/share/af7411986b5d4ddaae8a286c6bfe837a?sid=427b8cbb-3bd0-4d7d-9709-67e48bfc7944)** talk about the following stuffs.
+### AWS SRA Infrastructure OU - Network Account
+[AWS Security Reference Architecture](https://lnkd.in/dYvqm8Y5) states that the Network account is the gateway between your apps and the Internet. Network resources are defined at one account, and then, leveraging another managed service called RAM(Resource Access Manager), these resources can be shared with accounts in the organization or only with the accounts within one or more specified organizational units (OUs).
 
-- Create a new AWS account for Networking on the Control Tower
-- Provision VPC, Subnets, Route Tables and Internet Gateway resources
-- Enable Resource Access Share of VPC across the Sandbox OU within the AWS Organization.
+![](/images/AWS%20SRA.PNG)
+
+### GitHub Repository
+The source code can be found **[here](https://github.com/anoopjayadharan/network)**
+
+### Building the Connectivity
+In one of the blogs, I talk about setting up an [AWS landing zone](https://www.linkedin.com/pulse/aws-landing-zone-anoop-jayadharan-oqg5f?trk=public_post_feed-article-content) using the control tower.
+
+Followed these steps from the control tower section of the Management account
+
+- Create an OU named "Infrastructure." 
+![](/images/OU%20List.png)
+
+- Create an AWS account named "Network" from the account factory.
+![](/images/Network%20Account.png)
+
+- Disable automatic creation of VPCs in all regions by the Account Factory in AWS Control Tower.
+![](/images/Disable%20VPC%20Creation.png)
+
+Now that our network account is ready, we must deploy a VPC resource using [Terraform](https://github.com/anoopjayadharan/network) via the [GitHub Actions workflow](https://github.com/anoopjayadharan/network/blob/main/.github/workflows/network.yml). 
+
+In another post, I discussed the steps to integrate [GitHub with AWS using OIDC](https://www.linkedin.com/pulse/oidc-integration-between-github-aws-anoop-jayadharan-ys2uf/?trackingId=69sxrTdmRiiz%2BJQ%2FRjvI%2Bw%3D%3D). In the same way, HCP Terraform must also be integrated with AWS for infrastructure provisioning. Add HCP as the OIDC provider on the AWS and create an IAM role. This role must be added as a variable on your HCP workspace/organization. 
+
+
+![](/images/HCP%20variable%20set.PNG)
+
+### Virtual Private Cloud(VPC)
+Our new VPC contains the following resources:
+
+- Two public subnets
+- Two private subnets
+- One internet gateway
+- Four routing tables
+
+![](/images/building%20network.jpg)
+
+A successful workflow summary will look like this;
+
+![](/images/workflow%20summary.PNG)
+
+### Network Account
+Connect to the **Network** account and verify the VPC creation.
+
+![](/images/vpc%20resource%20map.PNG)
+
+### Resource Access Manager(RAM)
+The last step is to create a resource share using AWS Resource Access Manager(RAM) to share all four VPC subnets with the "Sandbox" OU.
+
+![](/images/RAM%20Diagram.PNG)
+
+Our terraform code contains a file named **ram.tf** as follows;
+
+```terraform
+# Creates a Resource Access Manager (RAM) Resource Share
+resource "aws_ram_resource_share" "subnet_share" {
+  name = var.ram_name
+  tags = local.tags
+}
+
+# Associates Private Subnets to RAM
+resource "aws_ram_resource_association" "private_subnets" {
+  count              = length(var.private_subnet_cidr)
+  resource_arn       = aws_subnet.private[count.index].arn
+  resource_share_arn = aws_ram_resource_share.subnet_share.arn
+}
+
+# Associates Public Subnets to RAM
+resource "aws_ram_resource_association" "public_subnets" {
+  count              = length(var.public_subnet_cidr)
+  resource_arn       = aws_subnet.public[count.index].arn
+  resource_share_arn = aws_ram_resource_share.subnet_share.arn
+}
+
+# Share resources to Sandbox OU
+resource "aws_ram_principal_association" "ram_principal_association" {
+  principal          = var.ou_arn
+  resource_share_arn = aws_ram_resource_share.subnet_share.arn
+}
+```
+One quick tip is to add the **ARN of Sandbox OU** to the Terraform workspace.
+
+![](/images/workspace%20variable.PNG)
+
+Resource share has been created and will look like the one below. Notice "shared by me", ie, the Network Account
+
+![](/images/Resource%20share.PNG)
+
+### Development Account
+Connect to the "development" account, and you will see "shared with me" under RAM.
+
+![](/images/shared%20with%20me.PNG)
+
+In this way, all future accounts within **Sandbox OU** will inherit the shared VPC from the Network account. 
+
+### Reference
+
+- [AWS SRA](https://docs.aws.amazon.com/prescriptive-guidance/latest/security-reference-architecture/network.html)
+
+- [RAM](https://docs.aws.amazon.com/ram/latest/userguide/getting-started-sharing.html#getting-started-sharing-orgs)
