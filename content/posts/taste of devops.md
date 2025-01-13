@@ -6,7 +6,7 @@ categories: ["DevOps"]
 draft: false
 ---
 
-The landscape of cloud services adoption, especially among startups, has evolved significantly. Companies no longer rush to leverage core cloud services when transitioning workloads to a public cloud environment. Instead, a more strategic approach is being embraced.
+The landscape of cloud services adoption, especially among startups, has evolved significantly. Companies no longer rush to leverage core cloud services when transitioning workloads to a public cloud environment. Instead, a more strategic approach is being embraced.<!--more-->
 
 Initially, organizations establish a landing zone where they begin by utilizing managed cloud services. This approach often involves hosting a static website to comprehensively understand cloud solutions. Subsequently, the focus shifts towards automating website releases through a CI/CD pipeline. This streamlined process enhances efficiency and accelerates time to market, providing companies with a tangible experience of DevOps practices.
 

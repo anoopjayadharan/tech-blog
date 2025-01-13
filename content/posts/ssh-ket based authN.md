@@ -7,7 +7,7 @@ categories: ["Docs"]
 ---
 How about managing multiple GitHub accounts locally using SSH Keys?
 
-In the real world, you must work with multiple GitHub accounts: one for open-source contributions, another for personal projects, and probably one more for your corporate tasks.
+In the real world, you must work with multiple GitHub accounts: one for open-source contributions, another for personal projects, and probably one more for your corporate tasks.<!--more-->
 
 {{< admonition >}}
     The following diagram illustrates the setup

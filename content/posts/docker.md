@@ -1,11 +1,11 @@
 ---
 title: 'Dockerizing Cloudtalents Startup App'
 date: 2024-11-27
-tags: ["Docker", "python",  "nginx", "Gunicorn"]
+tags: ["Docker", "Python",  "nginx", "Gunicorn"]
 categories: ["DevOps"]
 ---
 
-Ever since the MVP was up and running, I could not stop building the Django application's docker image knowing the containerization fundamentals.
+Ever since the MVP was up and running, I could not stop building the Django application's docker image knowing the containerization fundamentals.<!--more-->
 
 Experimenting with various aspects of the docker container in the local machine was entertaining.
 
@@ -19,7 +19,14 @@ All right, here you go; this is the high-level overview of the application.
 - Gunicorn implements the web server gateway interface(WSGI), translating HTTP requests into something Python can understand
 - Postgres is the chosen database for storing the authenticated user data.
 
-We have chosen to run three containers: one for `NGINX`, one for the business logic `(Django + Gunicorn)`, and the last for `Postgres`. The source code is being pulled from the [CloudTalents](https://github.com/cloudtalents/fictitious-startup-v1) repo. 
+We have chosen to run three containers: one for `NGINX`, one for the business logic `(Django + Gunicorn)`, and the last for `Postgres`. 
+
+### Source code repo
+{{< admonition info>}}
+The Source code is available at [cloudtalents-startup-v1](https://github.com/anoopjayadharan/cloudtalents-startup-v1)
+
+{{< /admonition >}}
+
 
 However, the following changes were made to the `settings.py` file under the `cloudtalents` directory.
 

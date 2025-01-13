@@ -7,7 +7,7 @@ categories: ["Docs"]
 draft: false
 ---
 
-If you think security is paramount, stop using hard-coded cloud provider credentials in your CI/CD pipeline. In this blog, I discuss the steps to integrate GitHub as an OIDC provider in AWS.
+If you think security is paramount, stop using hard-coded cloud provider credentials in your CI/CD pipeline. In this blog, I discuss the steps to integrate GitHub as an OIDC provider in AWS.<!--more-->
 
 
 

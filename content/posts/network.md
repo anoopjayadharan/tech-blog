@@ -6,7 +6,7 @@ categories: ["DevOps"]
 draft: false
 ---
 
-Networking is one of the core pillars of the cloud computing model. Amazon VPC(virtual private cloud) helps you launch a secure, isolated private cloud hosted within a public cloud.
+Networking is one of the core pillars of the cloud computing model. Amazon VPC(virtual private cloud) helps you launch a secure, isolated private cloud hosted within a public cloud.<!--more-->
 
 In a multi-account environment, you must find a way to create VPCs and associated objects across managed accounts. AWS recommends creating a Network account under the Infrastructure OU.
 

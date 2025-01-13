@@ -5,7 +5,7 @@ tags: ["AWS", "EC2",  "Postgres", "Bash", "Packer", "Terraform", "GitHub Actions
 categories: ["DevOps"]
 ---
 
-Last week, AWS VPC resources were defined in a [Network account](https://www.linkedin.com/pulse/building-connectivity-anoop-jayadharan-che9f/?trackingId=yGJs0C6JdRZMziBoXhFCGQ%3D%3D) and shared across the accounts in the Sandbox OU 
+Last week, AWS VPC resources were defined in a [Network account](https://www.linkedin.com/pulse/building-connectivity-anoop-jayadharan-che9f/?trackingId=yGJs0C6JdRZMziBoXhFCGQ%3D%3D) and shared across the accounts in the Sandbox OU <!--more-->
 
 It's time to launch the `MVP`(minimum viable product). The developer has pushed the source code to a Github repo. As a DevOps engineer, your task is to build the system and publish the service for initial testing.
 
@@ -335,7 +335,7 @@ resource "aws_vpc_security_group_egress_rule" "allow_all_traffic_ipv4" {
 
 ### Browse Application
 
-`Try accessing the application http://ec2publicip`
+Go to `http://ec2publicip`
 
 
 {{< figure src="/images/website.PNG" title="Figure8: website" >}}
