@@ -2,7 +2,7 @@
 title: 'Dockerizing Cloudtalents Startup App'
 date: 2024-11-27
 tags: ["Docker", "python",  "nginx", "Gunicorn"]
-categories: ["Documentation"]
+categories: ["DevOps"]
 ---
 
 Ever since the MVP was up and running, I could not stop building the Django application's docker image knowing the containerization fundamentals.

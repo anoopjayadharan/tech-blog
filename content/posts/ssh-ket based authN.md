@@ -3,7 +3,7 @@ title: 'SSH-Key Based AuthN Github'
 date: 2024-10-25
 draft: false
 tags: ["GitHub", "SSH", "AuthN"]
-categories: ["Documentation"]
+categories: ["Docs"]
 ---
 How about managing multiple GitHub accounts locally using SSH Keys?
 

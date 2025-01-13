@@ -3,7 +3,7 @@ title: 'OIDC Integration between GitHub and AWS'
 date: 2024-10-29
 # hiddenFromHomePage: true
 tags: ["AWS", "OIDC",  "GitHub"]
-categories: ["Documentation"]
+categories: ["Docs"]
 draft: false
 ---
 

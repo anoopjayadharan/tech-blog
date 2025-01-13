@@ -2,7 +2,7 @@
 title: 'Networking in AWS'
 date: 2024-11-09
 tags: ["AWS", "VPC", "Terraform", "RAM"]
-categories: ["Documentation"]
+categories: ["DevOps"]
 draft: false
 ---
 

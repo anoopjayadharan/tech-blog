@@ -2,7 +2,7 @@
 title: 'Launching MVP'
 date: 2024-11-15
 tags: ["AWS", "EC2",  "Postgres", "Bash", "Packer", "Terraform", "GitHub Actions"]
-categories: ["Documentation"]
+categories: ["DevOps"]
 ---
 
 Last week, AWS VPC resources were defined in a [Network account](https://www.linkedin.com/pulse/building-connectivity-anoop-jayadharan-che9f/?trackingId=yGJs0C6JdRZMziBoXhFCGQ%3D%3D) and shared across the accounts in the Sandbox OU 

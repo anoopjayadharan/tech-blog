@@ -3,7 +3,7 @@ title: 'AWS Landing Zone using Control Tower'
 date: 2024-10-21
 draft: false
 tags: ["AWS", "devOps", "controltower"]
-categories: ["Documentation"]
+categories: ["DevOps"]
 ---
 Companies that follow the AWS Security Reference Architecture will have multiple accounts for various teams or divisions. As a Cloud/DevOps engineer, you are responsible for managing those accounts. <!--more-->
 
