@@ -253,11 +253,11 @@ volumes:
 
 The `app` container starts following the DB. The env files are being passed to the respective containers.
 
-{{< figure src="/images/docker-compose%20up.PNG" title="Docker compose" >}}
+{{< figure src="/images/docker-compose%20up.PNG" title="Figure1: Docker compose" >}}
 
 ### List containers
 
-{{< figure src="/images/docker-compose%20ps.PNG" title="container list" >}}
+{{< figure src="/images/docker-compose%20ps.PNG" title="Figure2: container list" >}}
 
 {{< admonition >}}
     Well, the containers are up and running. Let us examine the docker volumes.
@@ -265,7 +265,7 @@ The `app` container starts following the DB. The env files are being passed to t
 
 ### Docker Volumes
 
-{{< figure src="/images/docker%20volumes.PNG" title="docker volumes" >}}
+{{< figure src="/images/docker%20volumes.PNG" title="Figure3: docker volumes" >}}
 
 
 
@@ -275,13 +275,13 @@ Next, we need to apply the Django changes to create the sessions on the database
 
 {{< /admonition >}}
 
-{{< figure src="/images/py%20migrate-%20anoop.PNG" title="django migrate" >}}
+{{< figure src="/images/py%20migrate-%20anoop.PNG" title="Figure4: django migrate" >}}
 
 Significant, no errors. Now, let us try to access the application and upload an image.
 
 ### Browse the application
 
-{{< figure src="/images/web.PNG" title="App" >}}
+{{< figure src="/images/web.PNG" title="Figure5: App" >}}
 
 ### Observability
 
@@ -289,11 +289,11 @@ Let's look at the docker-compose logs to understand the flow. Nginx serves as a 
 
 
 
-{{< figure src="/images/docker-compose%20logs.PNG" title="logs" >}}
+{{< figure src="/images/docker-compose%20logs.PNG" title="Figure6: logs" >}}
 
 If you'd like to see the database tables, please refer to the following diagram. In the `startup_image` table, the image name is `DevOps`, and the description is `Overview`. The details match the figure above. 
 
-{{< figure src="/images/db%20tables.PNG" title="postgres db" >}}
+{{< figure src="/images/db%20tables.PNG" title="Figure7: postgres db" >}}
 
 
 

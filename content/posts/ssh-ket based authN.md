@@ -13,7 +13,8 @@ In the real world, you must work with multiple GitHub accounts: one for open-sou
     The following diagram illustrates the setup
 {{< /admonition >}}
 
-![](/images/ssh-key%20authn-Diagram.PNG)
+{{< figure src="/images/ssh-key%20authn-Diagram.PNG" title="Figure1: Diagram" >}}
+
 
 ### Watch me demontrate the task over a video **[HERE](https://www.loom.com/share/06c3fc273ff24547a94135f623e557be?sid=8522f7ed-a3fc-405e-a437-44b9b149eb63)**
 

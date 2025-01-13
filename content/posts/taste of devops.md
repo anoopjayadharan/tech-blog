@@ -20,7 +20,7 @@ In this blog, I delve into the intricacies of serving a static website on the AW
 
 ### Diagram
 
-{{< figure src="/images/diagram.PNG" title="Overview" >}}
+{{< figure src="/images/diagram.PNG" title="Figure1: Overview" >}}
 
 
 A workflow is triggered when a developer pushes code to the main branch. The workflow has three jobs defined:
@@ -93,7 +93,7 @@ Successful completion of `infra_job` will create the following resources on the 
 
 {{< /admonition >}}
 
-{{< figure src="/images/HCP%20Overview.PNG" title="Resources" >}}
+{{< figure src="/images/HCP%20Overview.PNG" title="Figure2: Resources" >}}
 
 ### Build_job
 The **build_job** is the easiest of all. It uses [Hugo setup](https://github.com/marketplace/actions/hugo-setup) actions to install and build our website. The build **Artifacts** are uploaded using the [Upload a Build Artifact](https://github.com/marketplace/actions/upload-a-build-artifact) GitHub action. 
@@ -167,7 +167,7 @@ The workflow summary page shows the successful completion of all jobs and the ge
 
 {{< /admonition >}}
 
-{{< figure src="/images/summary.PNG" title="Workflow Summary" >}}
+{{< figure src="/images/summary.PNG" title="Figure3: Workflow Summary" >}}
 
 Hence, all future releases are automated using GitHub actions CI/CD workflow. This setup can be further improved by creating a feature branch and testing changes before merging to the main branch. 
 

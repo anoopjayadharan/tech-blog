@@ -5,9 +5,9 @@ tags: ["AWS", "EC2",  "Postgres", "Bash", "Packer", "Terraform", "GitHub Actions
 categories: ["Documentation"]
 ---
 
-Last week, AWS VPC resources were defined in a [Network account and shared across the accounts in the Sandbox OU](https://www.linkedin.com/pulse/building-connectivity-anoop-jayadharan-che9f/?trackingId=yGJs0C6JdRZMziBoXhFCGQ%3D%3D) 
+Last week, AWS VPC resources were defined in a [Network account](https://www.linkedin.com/pulse/building-connectivity-anoop-jayadharan-che9f/?trackingId=yGJs0C6JdRZMziBoXhFCGQ%3D%3D) and shared across the accounts in the Sandbox OU 
 
-It's time to launch the `MVP(minimum viable product)`. The developer has pushed the source code to a Github repo. As a DevOps engineer, your task is to build the system and publish the service for initial testing.
+It's time to launch the `MVP`(minimum viable product). The developer has pushed the source code to a Github repo. As a DevOps engineer, your task is to build the system and publish the service for initial testing.
 
 
 ### Application Overview
@@ -16,7 +16,7 @@ It's time to launch the `MVP(minimum viable product)`. The developer has pushed 
 - Gunicorn implements the web server gateway interface(WSGI), translating HTTP requests into something Python can understand. 
  - Postgres is the chosen database for storing the authenticated user data. 
 
-{{< figure src="/images/App_diagram.PNG" title="App components" >}}
+{{< figure src="/images/App_diagram.PNG" title="Figure1: App components" >}}
 
 {{< admonition >}}
 All these components fit in an EC2 instance and serve the purpose. 
@@ -32,7 +32,7 @@ There are a handful of tasks out there for DevOps Engineers;
 ### Implementation
 The diagram depicts two CI/CD workflows. One builds the AMI using Packer, and the other deploys an EC2 from the custom AMI. Why Packer? We aim to build immutable images and deploy them without additional configuration. Using Packer, a custom AMI is built from the parent image(Ubuntu) using a BASH script. The script installs the necessary packages and sets up a Python environment for our application to run. For every GitHub release, an AMI gets created corresponding to the release version.
 
-{{< figure src="/images/mvp-Diagram.PNG" title="Diagram" >}}
+{{< figure src="/images/mvp-Diagram.PNG" title="Figure2: Diagram" >}}
 
 The `ec2.yml` workflow is set to manual trigger with an input variable "version." This ensures that the application release matches the AMI version. 
 
@@ -184,18 +184,18 @@ jobs:
 A new release has been published
 {{< /admonition >}}
 
-{{< figure src="/images/github%20release.PNG" title="GitHub Release" >}}
+{{< figure src="/images/github%20release.PNG" title="Figure3: GitHub Release" >}}
 
 {{< admonition tip>}}
 Packer run produces below output
 {{< /admonition >}}
 
-{{< figure src="/images/packer%20build%20-%20github.PNG" title="Packer Build" >}}
+{{< figure src="/images/packer%20build%20-%20github.PNG" title="Figure4: Packer Build" >}}
 
 {{< admonition tip "Amazon Machine Image">}}
 {{< /admonition >}}
 
-{{< figure src="/images/AMI.PNG" title="AMI" >}}
+{{< figure src="/images/AMI.PNG" title="Figure5: AMI" >}}
 
 Next, we need to deploy an EC2 instance from this custom AMI. Let's examine the `ec2.yml` workflow. The `launch_ec2` job uses terraform to deploy the instance. In the `terraform apply` command, an input variable named "AMI version" is being supplied. This ensures that the application release matches the AMI version.
 
@@ -329,16 +329,16 @@ resource "aws_vpc_security_group_egress_rule" "allow_all_traffic_ipv4" {
 
 ### Workflow Trigger
 
-{{< figure src="/images/github_manual%20trigger_input.PNG" title="ec2.yaml" >}}
+{{< figure src="/images/github_manual%20trigger_input.PNG" title="Figure6: ec2.yaml" >}}
 
-{{< figure src="/images/ec2.PNG" title="EC2 instance" >}}
+{{< figure src="/images/ec2.PNG" title="Figure7: EC2 instance" >}}
 
 ### Browse Application
 
 `Try accessing the application http://ec2publicip`
 
 
-{{< figure src="/images/website.PNG" title="website" >}}
+{{< figure src="/images/website.PNG" title="Figure8: website" >}}
 
 **Hurray, the MVP is up and running**
 

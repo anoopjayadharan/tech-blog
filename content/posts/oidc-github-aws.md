@@ -18,21 +18,21 @@ Using hardcoded secrets requires creating credentials in the cloud provider and 
 On the other hand, OpenID Connect allows your workflows to exchange short-lived tokens directly from your cloud provider.
 
 ### How it works
-{{< figure src="/images/Github%20OIDC%20with%20AWS.png" title="OIDC Integration between GitHub and AWS" >}}
+{{< figure src="/images/Github%20OIDC%20with%20AWS.png" title="Figure1: OIDC Integration between GitHub and AWS" >}}
 
 
 ### Action Items
 - Configure GitHub as an OIDC provider in AWS
-{{< figure src="/images/IDP_AWS.png" title="OIDC Provider" >}}
+{{< figure src="/images/IDP_AWS.png" title="Figure2: OIDC Provider" >}}
 
 - Create an IAM policy; here, I give an example of  uploading objects to my s3 bucket.
 
-    {{< figure src="/images/IAM%20Policy.PNG" title="IAM Policy" >}}
+    {{< figure src="/images/IAM%20Policy.PNG" title="Figure3: IAM Policy" >}}
 
 
 - Create an IAM Role of type web Identity. To create a trust policy, you must provide details like GitHub organization, repository(optional) and branch(optional).
 
-    {{< figure src="/images/IAM_Role.png" title="IAM Role" >}}
+    {{< figure src="/images/IAM_Role.png" title="Figure4: IAM Role" >}}
 
 
 - Copy the Role ARN and create it as a GitHub secret.
@@ -45,7 +45,7 @@ On the other hand, OpenID Connect allows your workflows to exchange short-lived 
 
 Last, every time a job runs, GitHub's OIDC Provider auto-generates an OIDC token. The job requires a  permissions setting with id-token: write to allow GitHub's OIDC provider to create a JSON Web Token for every run.
 
-{{< figure src="/images/OIDC.PNG" title="OIDC Flow" >}}
+{{< figure src="/images/OIDC.PNG" title="Figure5: OIDC Flow" >}}
 1. In your cloud provider, create an OIDC trust between your cloud role and your GitHub workflow(s) that need access to the cloud.
 
 2. Every time your job runs, GitHub's OIDC Provider auto-generates an OIDC token. This token contains multiple claims to establish a security-hardened and verifiable identity about the specific workflow that is trying to authenticate.
@@ -58,7 +58,7 @@ Last, every time a job runs, GitHub's OIDC Provider auto-generates an OIDC token
 A sample workflow is supplied at https://gist.github.com/anoopjayadharan-me/c7485ed9264f64ef3edbc2dc069e139e.
 
 {{< /admonition >}}
-{{< figure src="/images/OIDC%20workflow.PNG" title="gist" >}}
+{{< figure src="/images/OIDC%20workflow.PNG" title="Figure6: gist" >}}
 
 
 ### Reference
