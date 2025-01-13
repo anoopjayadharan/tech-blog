@@ -1,6 +1,6 @@
 ---
 title: 'A Taste of DevOps(My Tech-Blog)'
-date: 2024-10-19
+date: 2024-11-02
 tags: ["AWS", "devOps", "Git", "GitHub Actions", "Terraform"]
 categories: ["Documentation"]
 draft: false

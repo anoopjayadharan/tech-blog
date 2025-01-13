@@ -1,6 +1,6 @@
 ---
 title: 'SSH-Key Based AuthN Github'
-date: 2024-10-17
+date: 2024-10-25
 draft: false
 tags: ["GitHub", "SSH", "AuthN"]
 categories: ["Documentation"]
