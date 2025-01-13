@@ -20,7 +20,8 @@ In this blog, I delve into the intricacies of serving a static website on the AW
 
 ### Diagram
 
-![](/images/diagram.PNG)
+{{< figure src="/images/diagram.PNG" title="Overview" >}}
+
 
 A workflow is triggered when a developer pushes code to the main branch. The workflow has three jobs defined:
 
@@ -29,8 +30,8 @@ A workflow is triggered when a developer pushes code to the main branch. The wor
 - Update the S3 bucket with the new contents and invalidate the CloudFront cache. 
 
 ### GitHub Repository
+  Source code can be found in this **[GitHub Repo](https://github.com/anoopjayadharan/tech-blog)**
 
-Source code can be found in this **[repo](https://github.com/anoopjayadharan/tech-blog)**
 
 ### CI/CD Workflow
 The **infra_job** checks out the current repository and executes the Terraform workflow in **HCP Terraform** . The [HashiCorp—Setup Terraform](https://github.com/marketplace/actions/hashicorp-setup-terraform) action installs the Terraform CLI on a GitHub-hosted runner. A few placeholders are passed to the [GITHUB_OUTPUTS](https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/passing-information-between-jobs) for later use in subsequent jobs.
@@ -87,8 +88,12 @@ jobs:
                 echo "cfid=$(terraform output cloudFront_ID | tr -d '""')" >> "$GITHUB_OUTPUT"
                 echo "domain=$(terraform output cloudFront_domain_name | tr -d '""')" >> "$GITHUB_OUTPUT"
 ```
-Successful completion of **infra_job** will create the following resources on the **HCP Terraform**.
-![](/images/HCP%20Overview.PNG)
+{{< admonition >}}
+Successful completion of `infra_job` will create the following resources on the `HCP Terraform`
+
+{{< /admonition >}}
+
+{{< figure src="/images/HCP%20Overview.PNG" title="Resources" >}}
 
 ### Build_job
 The **build_job** is the easiest of all. It uses [Hugo setup](https://github.com/marketplace/actions/hugo-setup) actions to install and build our website. The build **Artifacts** are uploaded using the [Upload a Build Artifact](https://github.com/marketplace/actions/upload-a-build-artifact) GitHub action. 
@@ -157,9 +162,12 @@ deploy_job:
                 --paths "/*"
 ```
 ### Workflow Summary
-The workflow summary page shows the successful completion of all jobs and the generated Artifact. 
+{{< admonition info>}}
+The workflow summary page shows the successful completion of all jobs and the generated Artifact
 
-![](/images/summary.PNG)
+{{< /admonition >}}
+
+{{< figure src="/images/summary.PNG" title="Workflow Summary" >}}
 
 Hence, all future releases are automated using GitHub actions CI/CD workflow. This setup can be further improved by creating a feature branch and testing changes before merging to the main branch. 
 
