@@ -20,7 +20,7 @@ In a multi-account environment, you must find a way to create VPCs and associate
 The source code can be found **[HERE](https://github.com/anoopjayadharan/network)**
 
 ### Building the Connectivity
-In one of the blogs, I talk about setting up an [AWS landing zone](https://www.linkedin.com/pulse/aws-landing-zone-anoop-jayadharan-oqg5f?trk=public_post_feed-article-content) using the control tower.
+In one of the blogs, I talk about setting up an [AWS landing zone](https://www.devopsifyengineering.com/foundation/) using the control tower.
 
 Followed these steps from the control tower section of the Management account
 

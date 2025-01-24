@@ -7,7 +7,7 @@ categories: ["DevOps"]
 
 In the previous post, we used docker-compose to build and manage our multi-container application. Today, I talk about orchestrating those containers using Kubernetes.<!--more-->
 
-fter building the docker image in the [previous article](https://www.linkedin.com/pulse/dockerizing-cloudtalents-startup-app-anoop-jayadharan-vskaf/?trackingId=iRoFzUd2TLGuioGcmYsSVw%3D%3D), it's time to orchestrate containers using K8s. 
+fter building the docker image in the [previous article](https://www.devopsifyengineering.com/docker/), it's time to orchestrate containers using K8s. 
 
 Follow along by cloning the below repo.
 

@@ -9,7 +9,7 @@ Ever since the MVP was up and running, I could not stop building the Django appl
 
 Experimenting with various aspects of the docker container in the local machine was entertaining.
 
-Reading my previous [article](https://www.linkedin.com/pulse/launching-mvp-anoop-jayadharan-qlnef/?trackingId=NG7dNWAJQWe1O%2FaGODOPiw%3D%3D) will help you learn about the cloud talents application we will containerize.
+Reading my previous [article](https://www.devopsifyengineering.com/launching-mvp/) will help you learn about the cloud talents application we will containerize.
 
 
 All right, here you go; this is the high-level overview of the application.

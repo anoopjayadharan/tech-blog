@@ -5,7 +5,7 @@ tags: ["AWS", "EC2",  "Postgres", "Bash", "Packer", "Terraform", "GitHub Actions
 categories: ["DevOps"]
 ---
 
-Last week, AWS VPC resources were defined in a [Network account](https://www.linkedin.com/pulse/building-connectivity-anoop-jayadharan-che9f/?trackingId=yGJs0C6JdRZMziBoXhFCGQ%3D%3D) and shared across the accounts in the Sandbox OU <!--more-->
+Last week, AWS VPC resources were defined in a [Network account](https://www.devopsifyengineering.com/network/) and shared across the accounts in the Sandbox OU <!--more-->
 
 It's time to launch the `MVP`(minimum viable product). The developer has pushed the source code to a Github repo. As a DevOps engineer, your task is to build the system and publish the service for initial testing.
 
@@ -117,7 +117,7 @@ build {
 
 The AMI details are provided in the `source` block, which is triggered by the `build` block underneath. The build block defines a couple of provisioner blocks to leverage file transfer and script execution. The packer build command requires a few arguments, such as `vpc_id` and `subnet_id`, which are defined as variables. 
 
-Let us move on to the `image.yml` workflow file. This workflow is triggered every time a new release is published. Within `build_job` step 6, secrets.sh gets created to store the DB credentials. Security-minded people out there, I know this is not a recommended practice. In the upcoming post, I will use AWS-managed services to store the secrets. Okay, back to the workflow. GitHub Actions uses [OIDC integration with AWS](https://www.linkedin.com/pulse/oidc-integration-between-github-aws-anoop-jayadharan-ys2uf/?trackingId=EQn4PbRATfCZ%2BP9EgVpZtQ%3D%3D). In the last step, the packer builds the image, and we use the value of github.ref_name as the version. This value replaces the AMI version in the packer template.
+Let us move on to the `image.yml` workflow file. This workflow is triggered every time a new release is published. Within `build_job` step 6, secrets.sh gets created to store the DB credentials. Security-minded people out there, I know this is not a recommended practice. In the upcoming post, I will use AWS-managed services to store the secrets. Okay, back to the workflow. GitHub Actions uses [OIDC integration with AWS](https://www.devopsifyengineering.com/oidc-github-aws/). In the last step, the packer builds the image, and we use the value of github.ref_name as the version. This value replaces the AMI version in the packer template.
 
 ```yaml
 name: private_ami
