@@ -45,8 +45,8 @@ data:
     DATABASE: "postgres"
 ```
 
-### Setting Up the Postgres Secret
-We’ll use the env file from the [docker](https://www.linkedin.com/pulse/dockerizing-cloudtalents-startup-app-anoop-jayadharan-vskaf/?trackingId=pFcG%2FfcPTbu3eRvpP0cA7A%3D%3D) section, removing variables inserted into the ConfigMap.
+### Creating Postgres Secret
+We’ll use the env file from the [docker](https://www.devopsifyengineering.com/docker/) section, removing variables inserted into the ConfigMap.
 
 Create a file `db-secrets` and load the values as follows.
 
@@ -152,6 +152,26 @@ The local-path provisioner mounts a directory /opt/local-path-provisioner on the
 {{< figure src="/images/mount.PNG" title="Figure4: directory mount" >}}
 {{< /admonition >}}
 
+### Creating App Secret
+
+Create a file `django-secrets` and load the values as follows.
+
+```bash
+SECRET_KEY=<FILL_HERE>
+SQL_DATABASE=mvp
+SQL_USER=<FILL_HERE>
+SQL_PASSWORD=<FILL_HERE>
+SQL_HOST=db
+SQL_PORT=5432
+```
+{{< admonition info>}}
+Now, create the secret using the following command
+
+{{< /admonition >}}
+
+```
+kubectl create secret generic app-secret  --from-env-file=django-secrets
+```
 ### Rolling out the Django app using a Deployment
 
 In this step, we will create a Deployment for your Django app. A Kubernetes Deployment is a controller that can manage stateless applications in your cluster. A controller is a control loop that regulates workloads by scaling them up or down. Controllers also restart and clear out failed containers.
